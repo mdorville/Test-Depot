@@ -11,9 +11,9 @@ public class AfficherSelect {
 
 			Class.forName("org.postgresql.Driver") ;
 			co = DriverManager.getConnection("jdbc:postgresql:bddorville", "mdorville", "kugipanchi");
-		    //TODO
 			Statement stSelect = co.createStatement();
 			ResultSet rsSelect = stSelect.executeQuery("SELECT * FROM Pilotes");
+			//Parcourir le Select
 			while (rsSelect.next()) {
 			int num = rsSelect.getInt("numPilote");
 			String nom = rsSelect.getString(2);

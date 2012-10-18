@@ -6,9 +6,12 @@ import javax.swing.*;
 public class FenetreSelect extends JFrame{	
 	private JPanel panel;
 	private JLabel label1;
+	private JLabel label2;
 
 	public FenetreSelect(){
 		panel = new JPanel();
+		label1 = new JLabel();
+		label2 = new JLabel();
 		
 		this.setTitle("Table Pilote");
 		this.setLocation(430,300);
