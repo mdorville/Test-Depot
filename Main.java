@@ -8,6 +8,8 @@ public class Main {
 		
 		/*AfficherSelect as = new AfficherSelect();
 		as.afficher();*/
+		
+		FenetreSelect fse = new FenetreSelect();
 	}
 
 }

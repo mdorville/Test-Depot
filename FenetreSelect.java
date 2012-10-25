@@ -1,4 +1,11 @@
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import javax.swing.*;
 
 
@@ -10,8 +17,6 @@ public class FenetreSelect extends JFrame{
 
 	public FenetreSelect(){
 		panel = new JPanel();
-		label1 = new JLabel();
-		label2 = new JLabel();
 		
 		this.setTitle("Table Pilote");
 		this.setLocation(430,300);
@@ -22,7 +27,31 @@ public class FenetreSelect extends JFrame{
 		this.setUndecorated(false);
 		this.getContentPane().add(panel);
 		
-		panel.setLayout(new GridLayout());
+		Connection co = null;
+		try { 
+
+			Class.forName("org.postgresql.Driver") ;
+			co = DriverManager.getConnection("jdbc:postgresql:bddorville", "mdorville", "kugipanchi");
+			Statement stSelect = co.createStatement();
+			ResultSet rsSelect = stSelect.executeQuery("SELECT * FROM Pilotes");
+			while (rsSelect.next()) {
+			int num = rsSelect.getInt("numPilote");
+			String nom = rsSelect.getString(2);
+			String prenom = rsSelect.getString(3);
+			label1 = new JLabel("Numero : "+num+" Nom : "+nom+" Prenom : "+prenom);
+			panel.setLayout(new GridLayout(rsSelect.getFetchSize(),1));
+			panel.add(label1);
+			}
+			co.close();
+		}
+		catch(ClassNotFoundException erreur) { 
+			System.out.println("Driver non chargé !"+erreur); 
+		} 
+		catch(SQLException erreur) { 
+			System.out.println("SQL error"+erreur);
+		}
+		
+
 		
 		this.setVisible(true);
 	}
